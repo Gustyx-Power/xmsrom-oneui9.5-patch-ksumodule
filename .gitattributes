@@ -1,5 +1,10 @@
 *.sh text eol=lf
+*.py text eol=lf
+*.md text eol=lf
 module.prop text eol=lf
+skip_mount text eol=lf
+*.rule text eol=lf
+system_ext_seapp_contexts text eol=lf
 *.json text eol=lf
 *.js text eol=lf
 *.css text eol=lf
