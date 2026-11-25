@@ -168,6 +168,22 @@ if [ -d "$MODDIR/system/framework" ]; then
   done
 fi
 
+if [ -d "$MODDIR/system/lib64" ]; then
+  for f in "$MODDIR/system/lib64"/*.so; do
+    [ -f "$f" ] || continue
+    target="/system/lib64/${f##*/}"
+    [ -f "$target" ] || continue
+    chmod 0644 "$f" 2>/dev/null
+    chcon u:object_r:system_file:s0 "$f" 2>/dev/null
+    if "$BB" mount --bind "$f" "$target"; then
+      "$BB" mount --make-private "$target" 2>/dev/null
+      log "mounted file lib64/${f##*/}"
+    else
+      log "ERROR: bind lib64/${f##*/} failed"
+    fi
+  done
+fi
+
 rmdir /dev/.xms_orig/system /dev/.xms_orig 2>/dev/null
 printf '%s\n' "magic_mount" > "$STATE_DIR/active_engine"
 log "done"

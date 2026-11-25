@@ -13,8 +13,15 @@ elif [ -f "$STATE_DIR/job.json" ]; then
   rm -f "$STATE_DIR/job.json"
 fi
 
-# Auto-grant runtime permissions required by newly mounted Quick Share / Smart View system packages on existing /data
+# Post-boot fixes for BixbyWakeup (avoid QTI taro SoundTrigger crash loop) and Quick Share / Smart View runtime permissions
+need_qs=0
 if [ -d "$MODDIR/system/app/MdxKitService" ] || [ -d "$MODDIR/system/app/SmartMirroring" ]; then
+  need_qs=1
+fi
+need_wakeup=0
+[ -d "$MODDIR/system/app/BixbyWakeup" ] && need_wakeup=1
+
+if [ "$need_qs" -eq 1 ] || [ "$need_wakeup" -eq 1 ]; then
   (
     i=0
     while [ "$i" -lt 60 ]; do
@@ -24,13 +31,43 @@ if [ -d "$MODDIR/system/app/MdxKitService" ] || [ -d "$MODDIR/system/app/SmartMi
     done
     sleep 2
 
-    need_grant=0
-    for p in com.samsung.android.mdx.kit com.samsung.android.mcfds com.samsung.android.smartmirroring; do
-      if pm path "$p" >/dev/null 2>&1 && ! dumpsys package "$p" | grep -q "BLUETOOTH_CONNECT: granted=true"; then
-        need_grant=1
-        break
+    if [ "$need_wakeup" -eq 1 ] && pm path com.samsung.android.bixby.wakeup >/dev/null 2>&1; then
+      for cmp in \
+        com.samsung.android.bixby.wakeup/com.samsung.android.env.PersistentService \
+        com.samsung.android.bixby.wakeup/com.samsung.android.voicewakeup.soundtrigger.DspControlService; do
+        pm disable "$cmp" >/dev/null 2>&1 || true
+      done
+      prefs="/data/data/com.samsung.android.bixby.wakeup/shared_prefs/com.samsung.android.bixby.wakeup_preferences.xml"
+      if [ -f "$prefs" ]; then
+        if grep -qE 'name="(gesture_wakeup_enabled|voice_wake_up)" value="true"' "$prefs" 2>/dev/null; then
+          sed -i 's/name="gesture_wakeup_enabled" value="true"/name="gesture_wakeup_enabled" value="false"/; s/name="voice_wake_up" value="true"/name="voice_wake_up" value="false"/' "$prefs" 2>/dev/null || true
+          chown system:system "$prefs" 2>/dev/null || true
+          chmod 0660 "$prefs" 2>/dev/null || true
+          chcon u:object_r:system_app_data_file:s0 "$prefs" 2>/dev/null || true
+          am force-stop com.samsung.android.bixby.wakeup >/dev/null 2>&1 || true
+        fi
+      elif [ -d /data/data/com.samsung.android.bixby.wakeup ]; then
+        mkdir -p /data/data/com.samsung.android.bixby.wakeup/shared_prefs
+        chown system:system /data/data/com.samsung.android.bixby.wakeup/shared_prefs 2>/dev/null || true
+        chmod 0771 /data/data/com.samsung.android.bixby.wakeup/shared_prefs 2>/dev/null || true
+        chcon u:object_r:system_app_data_file:s0 /data/data/com.samsung.android.bixby.wakeup/shared_prefs 2>/dev/null || true
+        printf "<?xml version='1.0' encoding='utf-8' standalone='yes' ?>\n<map>\n    <boolean name=\"gesture_wakeup_enabled\" value=\"false\" />\n    <boolean name=\"voice_wake_up\" value=\"false\" />\n</map>\n" > "$prefs"
+        chown system:system "$prefs" 2>/dev/null || true
+        chmod 0660 "$prefs" 2>/dev/null || true
+        chcon u:object_r:system_app_data_file:s0 "$prefs" 2>/dev/null || true
+        am force-stop com.samsung.android.bixby.wakeup >/dev/null 2>&1 || true
       fi
-    done
+    fi
+
+    need_grant=0
+    if [ "$need_qs" -eq 1 ]; then
+      for p in com.samsung.android.mdx.kit com.samsung.android.mcfds com.samsung.android.smartmirroring; do
+        if pm path "$p" >/dev/null 2>&1 && ! dumpsys package "$p" | grep -q "BLUETOOTH_CONNECT: granted=true"; then
+          need_grant=1
+          break
+        fi
+      done
+    fi
 
     if [ "$need_grant" -eq 1 ]; then
       grant_perms() {

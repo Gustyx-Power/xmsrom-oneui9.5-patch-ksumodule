@@ -11,12 +11,17 @@ ui_print "*********************************************"
 
 mkdir -p "$STATE_DIR/installed" "$STATE_DIR/tmp" "$MODPATH/system"
 
-# Preserve already-downloaded add-ons when upgrading module ZIP
+# Preserve already-downloaded add-ons when upgrading module ZIP without clobbering bundled lib64 patches
 if [ -d "$OLD_MOD/system" ]; then
-  if [ -n "$(find "$OLD_MOD/system" -mindepth 1 2>/dev/null | head -n 1)" ]; then
-    ui_print "- Preserving previously installed OneUI packs..."
-    cp -af "$OLD_MOD/system/." "$MODPATH/system/"
-  fi
+  preserved=0
+  for sub in priv-app app etc framework; do
+    if [ -d "$OLD_MOD/system/$sub" ] && [ -n "$(find "$OLD_MOD/system/$sub" -mindepth 1 2>/dev/null | head -n 1)" ]; then
+      [ "$preserved" -eq 0 ] && ui_print "- Preserving previously installed OneUI packs..."
+      preserved=1
+      mkdir -p "$MODPATH/system"
+      cp -af "$OLD_MOD/system/$sub" "$MODPATH/system/"
+    fi
+  done
 fi
 
 # Detect mount strategy for user visibility
