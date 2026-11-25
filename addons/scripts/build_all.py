@@ -18,7 +18,7 @@ import zipfile
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
-DEFAULT_DUMP = REPO_ROOT.parent
+DEFAULT_DUMP = REPO_ROOT.parent.parent
 EXTRA_DIR = REPO_ROOT / "extra_sources"
 PRESETS_DIR = REPO_ROOT / "presets"
 MODULE_DIR = REPO_ROOT / "module"

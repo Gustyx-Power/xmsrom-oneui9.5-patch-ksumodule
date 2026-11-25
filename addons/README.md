@@ -45,12 +45,12 @@ A lightweight, **One UI-styled KernelSU Next WebUI** module for adding Samsung O
 
 ```bash
 # 1. Build all .tar.xz packs, update catalog.json sha256/bytes, and build thin KSU ZIP
-python scripts/build_all.py
+python addons/scripts/build_all.py
 
 # 2. Upload dist/packs/*.tar.xz + catalog.json to Hugging Face Dataset
 pip install huggingface_hub
 set HF_TOKEN=hf_xxxxxxxxxxxxxxxxx
-python scripts/upload_hf.py --repo GustyxPower/xmsrom-oneui9.5-addons
+python addons/scripts/upload_hf.py --repo GustyxPower/xmsrom-oneui9.5-addons
 
 # 3. Attach dist/xmsrom-oneui9.5-addons-v1.0.0.zip to GitHub Release tag v1.0.0
 ```
@@ -80,12 +80,12 @@ Lihat tabel di atas untuk ID paket, perkiraan ukuran setelah ekstrak, dan catata
 
 ```bash
 # 1. Build seluruh paket .tar.xz, perbarui sha256 di catalog.json, dan buat ZIP modul tipis
-python scripts/build_all.py
+python addons/scripts/build_all.py
 
 # 2. Upload isi dist/packs/*.tar.xz + catalog.json ke Hugging Face Dataset
 pip install huggingface_hub
 set HF_TOKEN=hf_xxxxxxxxxxxxxxxxx
-python scripts/upload_hf.py --repo GustyxPower/xmsrom-oneui9.5-addons
+python addons/scripts/upload_hf.py --repo GustyxPower/xmsrom-oneui9.5-addons
 
 # 3. Upload dist/xmsrom-oneui9.5-addons-v1.0.0.zip ke GitHub Releases (tag v1.0.0)
 ```

@@ -2,7 +2,7 @@ import { exec, toast, hasKsuBridge } from "./ksu.js";
 
 const CTL = "/data/adb/modules/xmsrom_oneui95_addons/scripts/addon_ctl.sh";
 const REMOTE_CATALOG_URL =
-  "https://raw.githubusercontent.com/Gustyx-Power/xmsrom-oneui9.5-patch-ksumodule/main/catalog.json";
+  "https://raw.githubusercontent.com/Gustyx-Power/xmsrom-oneui9.5-patch-ksumodule/main/addons/catalog.json";
 
 const I18N = {
   id: {
