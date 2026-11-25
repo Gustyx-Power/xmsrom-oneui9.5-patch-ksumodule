@@ -305,6 +305,26 @@
       ]
     },
     {
+      "id": "lmc-cam",
+      "name": "LMC8.4 Camera (GCam)",
+      "category": "Kamera",
+      "category_en": "Camera",
+      "badge": "Rekomendasi",
+      "badge_en": "Recommended",
+      "description": "Kamera GCam LMC8.4 (org.codeaurora.snapcam) terintegrasi sebagai aplikasi sistem lengkap dengan lib arm64 & dukungan aux camera.",
+      "description_en": "Systemized LMC8.4 GCam (org.codeaurora.snapcam) with bundled arm64 native libraries and aux camera support.",
+      "note": "Jika sebelumnya terinstal versi user di /data/app, hapus duplikatnya setelah reboot agar berjalan murni dari /system/priv-app.",
+      "note_en": "If previously installed as a user app in /data/app, uninstall the duplicate update after reboot to run cleanly from /system/priv-app.",
+      "archive": "lmc-cam.tar.xz",
+      "archive_bytes": 219343832,
+      "unpacked_mb": 274.6,
+      "sha256": "60ee610f88c542cc2107982646ec314d800252816a705b89a302bca3562044d0",
+      "targets": [
+        "priv-app/LMCCam",
+        "etc/sysconfig/allowed-system-preload-lmc.xml"
+      ]
+    },
+    {
       "id": "bixby-wakeup",
       "name": "Bixby Voice Wakeup (Hi Bixby)",
       "category": "Bixby & AI",

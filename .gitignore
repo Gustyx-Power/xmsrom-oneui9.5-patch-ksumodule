@@ -1,4 +1,5 @@
 dist/
+extra_sources/
 __pycache__/
 *.pyc
 *.log

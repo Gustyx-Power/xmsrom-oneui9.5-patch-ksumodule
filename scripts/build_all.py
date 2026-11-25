@@ -19,6 +19,8 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_DUMP = REPO_ROOT.parent
+EXTRA_DIR = REPO_ROOT / "extra_sources"
+PRESETS_DIR = REPO_ROOT / "presets"
 MODULE_DIR = REPO_ROOT / "module"
 DIST_DIR = REPO_ROOT / "dist"
 PACKS_DIR = DIST_DIR / "packs"
@@ -58,16 +60,27 @@ def build_packs(dump_dir: Path, preset: int, only_ids: set[str] | None = None) -
         files_to_add: list[tuple[Path, str]] = []
         total_unpacked = 0
         for rel in targets:
-            src_dir = dump_dir / rel
-            if not src_dir.is_dir():
-                raise FileNotFoundError(f"[{pid}] Missing source directory: {src_dir}")
-            apks = [p for p in src_dir.rglob("*.apk") if p.is_file()]
-            if not apks:
-                raise FileNotFoundError(f"[{pid}] No APK files inside: {src_dir}")
-            for apk in sorted(apks):
-                arcname = f"system/{apk.relative_to(dump_dir).as_posix()}"
-                files_to_add.append((apk, arcname))
-                total_unpacked += apk.stat().st_size
+            src_base = next(
+                (b for b in (PRESETS_DIR, EXTRA_DIR, dump_dir) if (b / rel).exists()),
+                dump_dir,
+            )
+            src_path = src_base / rel
+            if not src_path.exists():
+                raise FileNotFoundError(f"[{pid}] Missing source path: {src_path}")
+            if src_path.is_file():
+                items = [src_path]
+            else:
+                items = [
+                    p
+                    for p in src_path.rglob("*")
+                    if p.is_file() and p.suffix in {".apk", ".so", ".xml"} and "oat" not in p.parts
+                ]
+            if not items:
+                raise FileNotFoundError(f"[{pid}] No APK/SO/XML files inside: {src_path}")
+            for item in sorted(items):
+                arcname = f"system/{item.relative_to(src_base).as_posix()}"
+                files_to_add.append((item, arcname))
+                total_unpacked += item.stat().st_size
 
         t0 = time.time()
         print(f"[PACK] {pid}: compressing {len(files_to_add)} APK(s) ({total_unpacked / 1048576:.1f} MB raw)...")

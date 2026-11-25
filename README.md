@@ -38,6 +38,7 @@ A lightweight, **One UI-styled KernelSU Next WebUI** module for adding Samsung O
 | `bixby-interpreter` | Interpreter, Call Assist & IntelliVoice | ~173 MB | Live translation & call assist |
 | `bixby-tts-id-en` | Samsung TTS Voices (`id-ID` & `en-US`) | ~108 MB | Offline speech voices |
 | `smart-suggestions` | Personal Data Intelligence (Now Brief) | ~338 MB | Heavy; background context indexing |
+| `lmc-cam` | LMC8.4 Camera (`org.codeaurora.snapcam`) | ~274 MB | Systemized GCam + `lib/arm64` native libs |
 | `bixby-wakeup` | Bixby Voice Wakeup (`Hi Bixby`) | ~100 MB | Experimental on POCO F5 `taro` audio HAL |
 
 ### Maintainer Build & Release Commands
