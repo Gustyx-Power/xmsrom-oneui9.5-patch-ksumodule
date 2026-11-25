@@ -1,0 +1,7 @@
+id=xmsrom_oneui95_addons
+name=XMSROM OneUI 9.5 Add-ons
+version=v1.0.0
+versionCode=100
+author=GustyxPower
+description=Modular OneUI 9.5 add-on downloader & mounter via KernelSU WebUI (NoMount + MagicMount ready)
+updateJson=https://raw.githubusercontent.com/Gustyx-Power/xmsrom-oneui9.5-patch-ksumodule/main/update.json

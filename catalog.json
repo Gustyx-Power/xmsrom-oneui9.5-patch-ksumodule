@@ -1,0 +1,263 @@
+{
+  "version": "1.0.0",
+  "base_url": "https://huggingface.co/datasets/GustyxPower/xmsrom-oneui9.5-addons/resolve/main",
+  "fallback_base_url": "https://github.com/Gustyx-Power/xmsrom-oneui9.5-patch-ksumodule/releases/download/packs-v1",
+  "packs": [
+    {
+      "id": "bixby-core",
+      "name": "Bixby Assistant Core",
+      "category": "Bixby & AI",
+      "badge": "Utama",
+      "description": "Asisten suara dan perintah Bixby utama (ikon aplikasi & tombol samping).",
+      "note": "Berjalan untuk asisten manual/tombol. Untuk 'Hi Bixby' layar mati memerlukan paket bixby-wakeup.",
+      "archive": "bixby-core.tar.xz",
+      "archive_bytes": 34758092,
+      "unpacked_mb": 90.2,
+      "sha256": "df3f0b3938c2f19f4f7af1e5c8340612999b1bfcb91656c18ac88c79ab3a065c",
+      "targets": [
+        "priv-app/Bixby"
+      ]
+    },
+    {
+      "id": "routines",
+      "name": "Modes & Routines",
+      "category": "Otomatisasi",
+      "badge": "Rekomendasi",
+      "description": "Otomatisasi pemicu dan aksi berbasis Wi-Fi, Bluetooth TWS, lokasi, waktu, dan baterai.",
+      "note": "",
+      "archive": "routines.tar.xz",
+      "archive_bytes": 23840404,
+      "unpacked_mb": 76.3,
+      "sha256": "d5a5cd2e1ed1b98029ce748d1c05922fe75a9c4736476292899d659200046371",
+      "targets": [
+        "priv-app/Routines"
+      ]
+    },
+    {
+      "id": "multisound",
+      "name": "Separate App Sound & Audio Mirror",
+      "category": "Audio & Utilitas",
+      "badge": "Ringan",
+      "description": "Memisah output suara aplikasi tertentu ke TWS Bluetooth sementara suara lain tetap di speaker HP.",
+      "note": "",
+      "archive": "multisound.tar.xz",
+      "archive_bytes": 4474736,
+      "unpacked_mb": 14.5,
+      "sha256": "864d6e6b128b969056f0b87d894bf822b1a230e356f777c110402eea6a3674f0",
+      "targets": [
+        "priv-app/MultiSoundSetting",
+        "priv-app/AudioMirroring"
+      ]
+    },
+    {
+      "id": "edge-panels",
+      "name": "Edge Panels & One-Handed Kit",
+      "category": "Audio & Utilitas",
+      "badge": "Ringan",
+      "description": "Panel samping Clipboard Edge, Tasks Edge, Tools Edge, People Stripe, plus helper Mode Satu Tangan.",
+      "note": "",
+      "archive": "edge-panels.tar.xz",
+      "archive_bytes": 4720824,
+      "unpacked_mb": 13.3,
+      "sha256": "58177745bce90f50648b20e6fa1cab59d587947f6499598e4b0c7fd604ed785d",
+      "targets": [
+        "app/ClipboardEdge",
+        "priv-app/TaskEdgePanel_v3.2",
+        "app/CocktailQuickTool",
+        "priv-app/PeopleStripe",
+        "app/EasyOneHand3"
+      ]
+    },
+    {
+      "id": "live-effect",
+      "name": "Live Effect & Portrait Engine",
+      "category": "Galeri & Media",
+      "badge": "Rekomendasi",
+      "description": "Mesin efek kedalaman 3D potret untuk Live Effect di Galeri dan wallpaper.",
+      "note": "",
+      "archive": "live-effect.tar.xz",
+      "archive_bytes": 30120876,
+      "unpacked_mb": 49.4,
+      "sha256": "4e0d220b73a33a5306faf0c5b00d01397b52c38ca2fb8bcb6969dbc9ed66a7ff",
+      "targets": [
+        "priv-app/LiveEffectService"
+      ]
+    },
+    {
+      "id": "video-editor",
+      "name": "Samsung Video Editor & Trimmer",
+      "category": "Galeri & Media",
+      "badge": "",
+      "description": "Editor video bawaan One UI dan pemotong klip langsung dari Galeri & Pemutar Video.",
+      "note": "",
+      "archive": "video-editor.tar.xz",
+      "archive_bytes": 28493660,
+      "unpacked_mb": 69.6,
+      "sha256": "9d52a804e3c8ec66ac2165dad291adfc5092f549a7c4514792dfcba9e0ad46fc",
+      "targets": [
+        "app/VideoEditorLite_Dream_N",
+        "app/VideoTrimmer"
+      ]
+    },
+    {
+      "id": "photo-ai-editor",
+      "name": "AI Photo Editor & Remaster",
+      "category": "Galeri & Media",
+      "badge": "Ukuran Besar",
+      "description": "Editor foto AI lengkap (penghapus objek/bayangan), Photo Remaster, dan Sticker Center.",
+      "note": "Memerlukan framework saiv & samsungkeystoreutils (sudah ada di sistem). Efek generatif online butuh akun Samsung.",
+      "archive": "photo-ai-editor.tar.xz",
+      "archive_bytes": 134873964,
+      "unpacked_mb": 258.2,
+      "sha256": "97c55e69d82d9c9173044c12c2aae7ab93a571806da98d7e1554882625a236af",
+      "targets": [
+        "priv-app/PhotoEditor_AIFull",
+        "priv-app/PhotoRemasterService",
+        "app/StickerCenter"
+      ]
+    },
+    {
+      "id": "ocr-provider",
+      "name": "Live Text & OCR Engine",
+      "category": "Galeri & Media",
+      "badge": "Ukuran Besar",
+      "description": "Ekstraksi teks langsung dari foto, tangkapan layar, dan kamera Galeri.",
+      "note": "",
+      "archive": "ocr-provider.tar.xz",
+      "archive_bytes": 117015180,
+      "unpacked_mb": 151.2,
+      "sha256": "fdcf6bae8e98632297aaa3ff561ee10cb28b4fdf87dfc4b18fa31fb2ea2bf4f2",
+      "targets": [
+        "app/OCRDataProvider"
+      ]
+    },
+    {
+      "id": "game-booster",
+      "name": "Game Booster & GPUWatch",
+      "category": "Gaming",
+      "badge": "Rekomendasi",
+      "description": "Overlay kontrol Game Booster, monitor FPS/CPU/GPU real-time (GPUWatch), dan layanan GOS.",
+      "note": "GPUWatch menampilkan metrik overlay di game. GOS ikut disertakan untuk kompatibilitas Game Booster.",
+      "archive": "game-booster.tar.xz",
+      "archive_bytes": 9505568,
+      "unpacked_mb": 28.3,
+      "sha256": "3bae441135fb57bee91bfea5bb56f6319da54e2d5e9ae6f6f979ccea42f5de1b",
+      "targets": [
+        "priv-app/GameTools_Dream",
+        "priv-app/GameOptimizingService",
+        "priv-app/GpuWatchApp"
+      ]
+    },
+    {
+      "id": "quickshare-smartview",
+      "name": "Quick Share & Smart View",
+      "category": "Ekosistem",
+      "badge": "Rekomendasi",
+      "description": "Kirim file cepat antar perangkat (Quick Share) dan screen mirroring Smart View ke TV.",
+      "note": "",
+      "archive": "quickshare-smartview.tar.xz",
+      "archive_bytes": 11423392,
+      "unpacked_mb": 36.5,
+      "sha256": "2db39139353cf0af7d21d2a7949450fa0a516e029c75199fb300f0b037eda4d3",
+      "targets": [
+        "priv-app/ShareLive",
+        "app/SmartMirroring"
+      ]
+    },
+    {
+      "id": "link-to-windows",
+      "name": "Link to Windows (Phone Link)",
+      "category": "Ekosistem",
+      "badge": "",
+      "description": "Sinkronisasi notifikasi, SMS, clipboard, dan layar HP dengan PC Windows.",
+      "note": "",
+      "archive": "link-to-windows.tar.xz",
+      "archive_bytes": 29662316,
+      "unpacked_mb": 89.5,
+      "sha256": "ecf1865e51f03e808045211d92357cf3328950833143796052caa6a892afee8d",
+      "targets": [
+        "priv-app/LinkToWindowsService",
+        "priv-app/YourPhone_P1_5"
+      ]
+    },
+    {
+      "id": "bixby-vision",
+      "name": "Bixby Vision",
+      "category": "Bixby & AI",
+      "badge": "",
+      "description": "Pemindaian objek, kode QR, teks, dan terjemahan visual via kamera/Galeri.",
+      "note": "",
+      "archive": "bixby-vision.tar.xz",
+      "archive_bytes": 10838928,
+      "unpacked_mb": 31.0,
+      "sha256": "3e7a0d23d0903a98139f7e990d3a5841030845ee25433cbb93d5361e70b78080",
+      "targets": [
+        "app/VisionIntelligence3.7"
+      ]
+    },
+    {
+      "id": "bixby-interpreter",
+      "name": "Interpreter & Call Assist",
+      "category": "Bixby & AI",
+      "badge": "Ukuran Besar",
+      "description": "Penerjemah percakapan langsung, Call Assistant, mesin IntelliVoice, dan Samsung TTS inti.",
+      "note": "Untuk suara bicara offline bahasa Indonesia/Inggris, pasang juga paket bixby-tts-id-en.",
+      "archive": "bixby-interpreter.tar.xz",
+      "archive_bytes": 85060244,
+      "unpacked_mb": 172.7,
+      "sha256": "e4c2dc607c82b3e1ee21f2706e627249b92ece5875e6af67352888de4101b9af",
+      "targets": [
+        "priv-app/BixbyInterpreter",
+        "priv-app/CallAssistant",
+        "priv-app/SamsungIntelliVoiceServices",
+        "app/SamsungTTS"
+      ]
+    },
+    {
+      "id": "bixby-tts-id-en",
+      "name": "Samsung TTS Voices (ID & EN-US)",
+      "category": "Bixby & AI",
+      "badge": "",
+      "description": "Paket suara lokal Bahasa Indonesia dan Bahasa Inggris (US) untuk Bixby & Interpreter.",
+      "note": "",
+      "archive": "bixby-tts-id-en.tar.xz",
+      "archive_bytes": 80072220,
+      "unpacked_mb": 107.8,
+      "sha256": "954417c9566552c38947ad9f463d845e95d14aff0499303167a5a13251dd1ea6",
+      "targets": [
+        "app/SamsungTTSVoice_id_ID_f00_ICLM",
+        "app/SamsungTTSVoice_en_US_l03_ICLM"
+      ]
+    },
+    {
+      "id": "smart-suggestions",
+      "name": "Personal Data Intelligence (Now Brief)",
+      "category": "Bixby & AI",
+      "badge": "Berat",
+      "description": "Mesin kecerdasan konteks Samsung di balik Now Brief, Smart Suggestions, dan saran aksi cerdas.",
+      "note": "Ukuran ~338 MB serta menjalankan pengindeksan konteks di latar belakang.",
+      "archive": "smart-suggestions.tar.xz",
+      "archive_bytes": 158868136,
+      "unpacked_mb": 338.0,
+      "sha256": "1983d4c9df8faa6fb9a2515b810c484f4f156f164d8a0274efa2bb75b100174c",
+      "targets": [
+        "priv-app/SamsungSmartSuggestions"
+      ]
+    },
+    {
+      "id": "bixby-wakeup",
+      "name": "Bixby Voice Wakeup (Hi Bixby)",
+      "category": "Bixby & AI",
+      "badge": "Eksperimental",
+      "description": "Layanan deteksi kata kunci suara 'Hi Bixby' tanpa sentuh.",
+      "note": "Eksperimental di POCO F5: HAL audio taro tidak membawa firmware DSP keyword Samsung untuk wakeup layar mati.",
+      "archive": "bixby-wakeup.tar.xz",
+      "archive_bytes": 55519888,
+      "unpacked_mb": 99.8,
+      "sha256": "8246b35899027a9eb8a30d226b7b88e410218f56f42400d00abbf7408bc18bc2",
+      "targets": [
+        "app/BixbyWakeup"
+      ]
+    }
+  ]
+}

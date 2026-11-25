@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>XMSROM OneUI 9.5 Add-ons</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <div>
+        <h1 class="brand-title">XMSROM OneUI 9.5 Add-ons</h1>
+        <p class="brand-subtitle">Modular systemless packs on /data &middot; Maintainer: GustyxPower</p>
+      </div>
+      <div class="topbar-actions">
+        <button id="btn-sync" class="icon-btn" type="button" aria-label="Sinkronkan katalog dari GitHub" title="Sync catalog">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+            <path d="M3 3v5h5" />
+            <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16" />
+            <path d="M16 16h5v5" />
+          </svg>
+        </button>
+        <button id="btn-logs" class="icon-btn" type="button" aria-label="Lihat log mount" title="Mount logs">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+            <polyline points="14 2 14 8 20 8" />
+            <line x1="8" y1="13" x2="16" y2="13" />
+            <line x1="8" y1="17" x2="13" y2="17" />
+          </svg>
+        </button>
+        <button id="btn-settings" class="icon-btn" type="button" aria-label="Pengaturan mirror dan mode mount" title="Settings">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="3" />
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9c.26.6.85 1 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <section class="status-grid" aria-label="Status penyimpanan dan sistem">
+      <div class="stat-card">
+        <span class="stat-label">Mount Engine</span>
+        <span id="stat-engine" class="stat-value">Memuat...</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">Ruang /data Tersedia</span>
+        <span id="stat-data" class="stat-value">-</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">Add-on Terpasang</span>
+        <span id="stat-installed" class="stat-value">-</span>
+      </div>
+    </section>
+
+    <section id="job-banner" class="job-banner" hidden aria-live="polite">
+      <div class="job-header">
+        <span id="job-title" class="job-title">Memproses...</span>
+        <span id="job-pct" class="job-pct">0%</span>
+      </div>
+      <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="job-bar-wrap">
+        <div id="job-fill" class="progress-fill"></div>
+      </div>
+      <p id="job-msg" class="job-msg"></p>
+    </section>
+
+    <section class="controls-bar" aria-label="Pencarian dan filter kategori">
+      <div class="search-wrap">
+        <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="8" />
+          <line x1="21" y1="21" x2="16.65" y2="16.65" />
+        </svg>
+        <input id="search-input" class="search-input" type="search" placeholder="Cari Bixby, Routines, Edge, Photo AI..." aria-label="Cari paket fitur" />
+      </div>
+      <div id="chips-row" class="chips-row" role="tablist" aria-label="Filter kategori"></div>
+    </section>
+
+    <section id="pack-list" class="pack-list" aria-label="Daftar paket OneUI"></section>
+  </main>
+
+  <div id="reboot-bar" class="reboot-bar" hidden>
+    <div class="reboot-inner">
+      <span class="reboot-text">Perubahan modul siap diterapkan. Reboot agar sistem memuat APK baru.</span>
+      <button id="btn-reboot" class="btn btn-primary" type="button">Reboot Sekarang</button>
+    </div>
+  </div>
+
+  <dialog id="settings-modal" class="modal" aria-labelledby="settings-title">
+    <div class="modal-header">
+      <h2 id="settings-title" class="modal-title">Pengaturan Sumber &amp; Mount</h2>
+      <button id="btn-close-settings" class="icon-btn" type="button" aria-label="Tutup pengaturan">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+      </button>
+    </div>
+    <label class="field-label" for="input-mirror">Mirror Base URL Paket (.tar.xz)</label>
+    <input id="input-mirror" class="field-input" type="url" placeholder="Kosongkan untuk default Hugging Face di catalog.json" />
+    <label class="field-label" for="select-mode">Mode Mount</label>
+    <select id="select-mode" class="field-select">
+      <option value="auto">Auto (NoMount / Metamodule jika ada, else MagicMount)</option>
+      <option value="magic">Paksa Built-in Magic Mount (tmpfs + bind)</option>
+      <option value="metamodule">Serahkan ke Metamodule / NoMount Eksternal</option>
+    </select>
+    <div class="modal-actions">
+      <button id="btn-preset-hf" class="btn btn-secondary" type="button">Preset Hugging Face</button>
+      <button id="btn-preset-gh" class="btn btn-secondary" type="button">Preset GitHub Releases</button>
+      <button id="btn-save-settings" class="btn btn-primary" type="button">Simpan</button>
+    </div>
+  </dialog>
+
+  <dialog id="logs-modal" class="modal" aria-labelledby="logs-title">
+    <div class="modal-header">
+      <h2 id="logs-title" class="modal-title">Log Mount &amp; Diagnostik</h2>
+      <button id="btn-close-logs" class="icon-btn" type="button" aria-label="Tutup log">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+      </button>
+    </div>
+    <pre id="logs-box" class="log-box">Memuat log...</pre>
+    <div class="modal-actions">
+      <button id="btn-ok-logs" class="btn btn-secondary" type="button">Tutup</button>
+    </div>
+  </dialog>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
