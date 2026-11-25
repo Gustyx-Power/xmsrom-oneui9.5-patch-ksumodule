@@ -32,7 +32,7 @@ A lightweight, **One UI-styled KernelSU Next WebUI** module for adding Samsung O
 | `photo-ai-editor` | AI Photo Editor, Remaster & Stickers | ~258 MB | Cloud generative edits require Samsung Account |
 | `ocr-provider` | Live Text & OCR Engine | ~151 MB | Text extraction from photos & screenshots |
 | `game-booster` | Game Booster, GOS & GPUWatch | ~28 MB | In-game overlay & FPS/GPU metrics |
-| `quickshare-smartview` | Quick Share & Smart View | ~37 MB | Nearby file share & TV display casting |
+| `quickshare-smartview` | Quick Share & Smart View | ~73 MB | Nearby file share, Aware/MCF & P2P fix, Smart View casting |
 | `link-to-windows` | Link to Windows (Phone Link) | ~90 MB | PC sync companion |
 | `bixby-vision` | Bixby Vision | ~31 MB | Camera/Gallery visual scan |
 | `bixby-interpreter` | Interpreter, Call Assist & IntelliVoice | ~173 MB | Live translation & call assist |

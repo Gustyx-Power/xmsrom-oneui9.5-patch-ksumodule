@@ -196,12 +196,19 @@
       "note": "",
       "note_en": "",
       "archive": "quickshare-smartview.tar.xz",
-      "archive_bytes": 11423392,
-      "unpacked_mb": 36.5,
-      "sha256": "2db39139353cf0af7d21d2a7949450fa0a516e029c75199fb300f0b037eda4d3",
+      "archive_bytes": 24222936,
+      "unpacked_mb": 73.2,
+      "sha256": "07704b0003a5dc5a687f54415558fc432b2e725fc12b960a0d2dc634fa877190",
       "targets": [
         "priv-app/ShareLive",
-        "app/SmartMirroring"
+        "priv-app/MCFDeviceSync",
+        "priv-app/SamsungMultiConnectivity",
+        "priv-app/BeaconManager",
+        "app/SmartMirroring",
+        "app/AllShareAware",
+        "app/AllshareMediaShare",
+        "app/MdxKitService",
+        "framework/semwifi-service.jar"
       ]
     },
     {

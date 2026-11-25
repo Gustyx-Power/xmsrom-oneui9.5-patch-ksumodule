@@ -192,7 +192,7 @@ unpack_verified_archive() {
   # Record leaf paths relative to $MODDIR (e.g., system/priv-app/Bixby)
   list_tmp="$INST_DIR/${id}.list.tmp"
   : > "$list_tmp"
-  for sub in priv-app app etc/permissions etc/sysconfig etc/preferred-apps; do
+  for sub in priv-app app etc/permissions etc/sysconfig etc/preferred-apps framework; do
     [ -d "$stage/system/$sub" ] || continue
     for entry in "$stage/system/$sub"/*; do
       [ -e "$entry" ] || continue
@@ -315,7 +315,7 @@ cmd_remove() {
   while IFS= read -r rel || [ -n "$rel" ]; do
     [ -z "$rel" ] && continue
     case "$rel" in
-      system/priv-app/*|system/app/*|system/etc/permissions/*|system/etc/sysconfig/*|system/etc/preferred-apps/*)
+      system/priv-app/*|system/app/*|system/etc/permissions/*|system/etc/sysconfig/*|system/etc/preferred-apps/*|system/framework/*)
         case "$rel" in *..*) continue ;; esac
         rm -rf "$MODDIR/$rel"
         ;;

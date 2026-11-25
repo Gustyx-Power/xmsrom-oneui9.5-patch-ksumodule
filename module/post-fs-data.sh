@@ -152,6 +152,22 @@ magic_mount_dir "system/app"
 magic_mount_dir "system/etc/permissions"
 magic_mount_dir "system/etc/sysconfig"
 
+if [ -d "$MODDIR/system/framework" ]; then
+  for f in "$MODDIR/system/framework"/*.jar; do
+    [ -f "$f" ] || continue
+    target="/system/framework/${f##*/}"
+    [ -f "$target" ] || continue
+    chmod 0644 "$f" 2>/dev/null
+    chcon u:object_r:system_file:s0 "$f" 2>/dev/null
+    if "$BB" mount --bind "$f" "$target"; then
+      "$BB" mount --make-private "$target" 2>/dev/null
+      log "mounted file framework/${f##*/}"
+    else
+      log "ERROR: bind framework/${f##*/} failed"
+    fi
+  done
+fi
+
 rmdir /dev/.xms_orig/system /dev/.xms_orig 2>/dev/null
 printf '%s\n' "magic_mount" > "$STATE_DIR/active_engine"
 log "done"
