@@ -1,6 +1,6 @@
 id=xmsrom_selinux_enforce
 name=XMSROM SELinux Enforcing Guard
-version=v1.0.0
-versionCode=100
+version=v1.0.1
+versionCode=101
 author=GustyxPower
 description=Experimental KernelSU SELinux Enforcing test module for XMSROM OneUI 9.5 (patches sepolicy + oem_5xxx seapp_contexts with anti-bootloop rollback).

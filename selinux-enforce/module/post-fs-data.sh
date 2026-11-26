@@ -42,6 +42,38 @@ if [ -f "$SRC_SEAPP" ] && [ -f "$DST_SEAPP" ]; then
   fi
 fi
 
+# Bind-mount the speaker-routed stage policy before audioserver starts
+SRC_STAGE="$MODDIR/system/etc/stage_policy.conf"
+DST_STAGE="/system/etc/stage_policy.conf"
+if [ -f "$SRC_STAGE" ] && [ -f "$DST_STAGE" ]; then
+  chmod 0644 "$SRC_STAGE" 2>/dev/null
+  chcon u:object_r:system_file:s0 "$SRC_STAGE" 2>/dev/null
+  if [ -n "$BB" ] && "$BB" mount --bind "$SRC_STAGE" "$DST_STAGE"; then
+    "$BB" mount --make-private "$DST_STAGE" 2>/dev/null
+    log "mounted stage_policy.conf via $BB"
+  elif mount -o bind "$SRC_STAGE" "$DST_STAGE"; then
+    log "mounted stage_policy.conf via mount"
+  else
+    log "ERROR: failed to bind-mount stage_policy.conf"
+  fi
+fi
+
+# Bind-mount the patched MonoMix library before audioserver starts
+SRC_LIB="$MODDIR/system/lib64/libsecaudiomonomix.so"
+DST_LIB="/system/lib64/libsecaudiomonomix.so"
+if [ -f "$SRC_LIB" ] && [ -f "$DST_LIB" ]; then
+  chmod 0644 "$SRC_LIB" 2>/dev/null
+  chcon u:object_r:system_lib_file:s0 "$SRC_LIB" 2>/dev/null
+  if [ -n "$BB" ] && "$BB" mount --bind "$SRC_LIB" "$DST_LIB"; then
+    "$BB" mount --make-private "$DST_LIB" 2>/dev/null
+    log "mounted libsecaudiomonomix.so via $BB"
+  elif mount -o bind "$SRC_LIB" "$DST_LIB"; then
+    log "mounted libsecaudiomonomix.so via mount"
+  else
+    log "ERROR: failed to bind-mount libsecaudiomonomix.so"
+  fi
+fi
+
 mode="enforcing"
 [ -f "$MODE_FILE" ] && mode="$(tr -d ' \r\n' < "$MODE_FILE" 2>/dev/null)"
 stage="service"
