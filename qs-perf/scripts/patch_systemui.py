@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
-"""Reproducibly patch One UI 9.5 SystemUI.apk for QS smoothness (Opsi 3 Phase 2).
+"""Reproducibly patch One UI 9.5 SystemUI.apk for QS smoothness & idle thermals (Phase 2).
 
-Applies 11 targeted smali edits (async layout constraint update, Compose debug log
-off, RecompositionLogger bypass, QS blur radius 250/300 -> 110, hot Log.d removal),
+Applies targeted smali edits (async layout constraint update, Compose debug log
+off, RecompositionLogger bypass, QS blur radius 250/300 -> 110, hot Log.d removal,
+and Nexus AnimatorCore 120Hz Choreographer leak fix on EdgeLighting hide/detach),
 rebuilds classes*.dex via apktool, injects them into a verbatim copy of the stock
 SystemUI.apk, runs zipalign -f -p 4, and transplants the original APK Sig Block 42.
 """
@@ -451,6 +452,146 @@ def apply_smali_patches(smali_root: Path) -> None:
         """    iput v12, v1, Lkotlin/jvm/internal/Ref$FloatRef;->element:F
 
     invoke-static {}, Landroidx/compose/runtime/ComposerKt;->isTraceInProgress()Z""",
+    )
+
+    # 11. Stop Samsung Nexus AnimatorCore 120Hz Choreographer loop when EdgeLighting+ hides or detaches.
+    replace_once(
+        smali_root / "smali_classes5/com/samsung/android/nexus/base/animator/AnimatorCore$1.smali",
+        """    iget-object v0, p0, Lcom/samsung/android/nexus/base/animator/AnimatorCore$1;->this$0:Lcom/samsung/android/nexus/base/animator/AnimatorCore;
+
+    iget-wide v1, v0, Lcom/samsung/android/nexus/base/animator/AnimatorCore;->mFrameStartTime:J""",
+        """    iget-object v0, p0, Lcom/samsung/android/nexus/base/animator/AnimatorCore$1;->this$0:Lcom/samsung/android/nexus/base/animator/AnimatorCore;
+
+    iget-byte v1, v0, Lcom/samsung/android/nexus/base/animator/AnimatorCore;->mRenderMode:B
+
+    if-nez v1, :cond_render
+
+    return-void
+
+    :cond_render
+    iget-wide v1, v0, Lcom/samsung/android/nexus/base/animator/AnimatorCore;->mFrameStartTime:J""",
+    )
+    replace_once(
+        smali_root / "smali_classes5/com/samsung/android/nexus/base/animator/AnimatorCore.smali",
+        """    iget-object v0, p0, Lcom/samsung/android/nexus/base/animator/AnimatorCore;->mChoreographer:Landroid/view/Choreographer;
+
+    invoke-virtual {v0, v1}, Landroid/view/Choreographer;->removeFrameCallback(Landroid/view/Choreographer$FrameCallback;)V
+
+    iget-object p0, p0, Lcom/samsung/android/nexus/base/animator/AnimatorCore;->mChoreographer:Landroid/view/Choreographer;
+
+    invoke-virtual {p0, v1}, Landroid/view/Choreographer;->postFrameCallback(Landroid/view/Choreographer$FrameCallback;)V
+
+    return-void""",
+        """    iget-object v0, p0, Lcom/samsung/android/nexus/base/animator/AnimatorCore;->mChoreographer:Landroid/view/Choreographer;
+
+    invoke-virtual {v0, v1}, Landroid/view/Choreographer;->removeFrameCallback(Landroid/view/Choreographer$FrameCallback;)V
+
+    iget-byte v0, p0, Lcom/samsung/android/nexus/base/animator/AnimatorCore;->mRenderMode:B
+
+    if-eqz v0, :cond_stop
+
+    iget-object p0, p0, Lcom/samsung/android/nexus/base/animator/AnimatorCore;->mChoreographer:Landroid/view/Choreographer;
+
+    invoke-virtual {p0, v1}, Landroid/view/Choreographer;->postFrameCallback(Landroid/view/Choreographer$FrameCallback;)V
+
+    :cond_stop
+    return-void""",
+    )
+    replace_once(
+        smali_root / "smali_classes5/com/samsung/android/nexus/base/layer/LayerContainer.smali",
+        """    const-string v0, "LayerContainer"
+
+    const-string/jumbo v1, "destroy()"
+
+    invoke-static {v0, v1}, Lcom/samsung/android/nexus/base/utils/Log;->i(Ljava/lang/String;Ljava/lang/String;)V
+
+    iget-object p0, p0, Lcom/samsung/android/nexus/base/layer/LayerContainer;->mEffectLayer:Ljava/util/List;""",
+        """    const-string v0, "LayerContainer"
+
+    const-string/jumbo v1, "destroy()"
+
+    invoke-static {v0, v1}, Lcom/samsung/android/nexus/base/utils/Log;->i(Ljava/lang/String;Ljava/lang/String;)V
+
+    const/4 v0, 0x0
+
+    invoke-virtual {p0, v0}, Lcom/samsung/android/nexus/base/layer/LayerContainer;->setRenderMode(I)V
+
+    iget-object p0, p0, Lcom/samsung/android/nexus/base/layer/LayerContainer;->mEffectLayer:Ljava/util/List;""",
+    )
+    emitter_view = smali_root / "smali_classes5/com/samsung/android/nexus/particle/emitter/view/ParticleEmitterView.smali"
+    replace_once(
+        emitter_view,
+        """    const-string v0, "LayerContainer"
+
+    invoke-static {v0, p2}, Lcom/samsung/android/nexus/base/utils/Log;->i(Ljava/lang/String;Ljava/lang/String;)V
+
+    invoke-virtual {p0, p1}, Lcom/samsung/android/nexus/base/layer/LayerContainer;->onVisibilityChanged(Ljava/lang/Boolean;)V
+
+    :cond_1
+    return-void
+.end method
+
+.method public final onWindowVisibilityChanged(I)V""",
+        """    const-string v0, "LayerContainer"
+
+    invoke-static {v0, p2}, Lcom/samsung/android/nexus/base/utils/Log;->i(Ljava/lang/String;Ljava/lang/String;)V
+
+    invoke-virtual {p0, p1}, Lcom/samsung/android/nexus/base/layer/LayerContainer;->onVisibilityChanged(Ljava/lang/Boolean;)V
+
+    if-nez p2, :cond_hide_mode
+
+    const/4 p1, 0x2
+
+    goto :goto_mode
+
+    :cond_hide_mode
+    const/4 p1, 0x0
+
+    :goto_mode
+    invoke-virtual {p0, p1}, Lcom/samsung/android/nexus/base/layer/LayerContainer;->setRenderMode(I)V
+
+    :cond_1
+    return-void
+.end method
+
+.method public final onWindowVisibilityChanged(I)V""",
+    )
+    replace_once(
+        emitter_view,
+        """    const-string v1, "LayerContainer"
+
+    invoke-static {v1, v0}, Lcom/samsung/android/nexus/base/utils/Log;->i(Ljava/lang/String;Ljava/lang/String;)V
+
+    invoke-virtual {p0, p1}, Lcom/samsung/android/nexus/base/layer/LayerContainer;->onVisibilityChanged(Ljava/lang/Boolean;)V
+
+    :cond_1
+    return-void
+.end method""",
+        """    const-string v1, "LayerContainer"
+
+    invoke-static {v1, v0}, Lcom/samsung/android/nexus/base/utils/Log;->i(Ljava/lang/String;Ljava/lang/String;)V
+
+    invoke-virtual {p0, p1}, Lcom/samsung/android/nexus/base/layer/LayerContainer;->onVisibilityChanged(Ljava/lang/Boolean;)V
+
+    invoke-virtual {p1}, Ljava/lang/Boolean;->booleanValue()Z
+
+    move-result v0
+
+    if-eqz v0, :cond_win_hide
+
+    const/4 v0, 0x2
+
+    goto :goto_win_mode
+
+    :cond_win_hide
+    const/4 v0, 0x0
+
+    :goto_win_mode
+    invoke-virtual {p0, v0}, Lcom/samsung/android/nexus/base/layer/LayerContainer;->setRenderMode(I)V
+
+    :cond_1
+    return-void
+.end method""",
     )
 
 

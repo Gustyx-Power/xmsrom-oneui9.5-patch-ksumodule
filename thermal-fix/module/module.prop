@@ -1,0 +1,6 @@
+id=xmsrom_thermal_fix
+name=XMSROM Daily Thermal Fix
+version=v1.0.0
+versionCode=100
+author=GustyxPower
+description=Prevents GMS dck_stub 2-3s restart loop by masking DigitalKey (com.samsung.android.dkey) cleanly at boot

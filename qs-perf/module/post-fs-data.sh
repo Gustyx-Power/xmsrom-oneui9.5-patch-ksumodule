@@ -33,7 +33,7 @@ sync
 "$RP" -n debug.sf.enable_planner_prediction 1
 "$RP" -n debug.sf.predict_hwc_composition_strategy 1
 "$RP" -n debug.renderengine.kawase2_off_critical_path true
-"$RP" -n debug.sf.set_idle_timer_ms 0
+"$RP" -n debug.sf.set_idle_timer_ms 1000
 "$RP" -n ro.surface_flinger.use_content_detection_for_refresh_rate false
 log "applied Phase 1 SF props cleanly"
 

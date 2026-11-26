@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Normalize module scripts to LF and package xmsrom-qs-perf-v2.0.0.zip."""
+"""Normalize module scripts to LF and package xmsrom-qs-perf-v2.1.0.zip."""
 
 import zipfile
 from pathlib import Path
@@ -7,7 +7,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 MOD_DIR = ROOT / "module"
 STAGING_DIR = ROOT / "staging"
-OUT_ZIP = ROOT / "dist" / "xmsrom-qs-perf-v2.0.0.zip"
+OUT_ZIP = ROOT / "dist" / "xmsrom-qs-perf-v2.1.0.zip"
 TEXT_NAMES = {"module.prop", "skip_mount", "sysui_ver"}
 
 
