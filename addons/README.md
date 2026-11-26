@@ -40,6 +40,7 @@ A lightweight, **One UI-styled KernelSU Next WebUI** module for adding Samsung O
 | `smart-suggestions` | Personal Data Intelligence (Now Brief) | ~338 MB | Heavy; background context indexing |
 | `lmc-cam` | LMC8.4 Camera (`org.codeaurora.snapcam`) | ~274 MB | Systemized GCam + `lib/arm64` native libs |
 | `bixby-wakeup` | Bixby Voice Wakeup (`Hi Bixby`) | ~100 MB | Experimental on POCO F5 `taro` audio HAL |
+| `samsung-camera` | Samsung Camera One UI 9.5 (patched `17.5.00.69`) | ~78 MB | Rear/front photo & video, Night, Pro, Video Pro; PANORAMA/FOOD off; reboot required |
 
 ### Maintainer Build & Release Commands
 

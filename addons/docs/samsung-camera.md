@@ -131,7 +131,32 @@ the port produce 1920x1440 stills on both cameras.
 - Front-camera preview is dark in the test unit because the phone lies screen-up with the
   front camera covered; captures still succeed.
 
-## 9. Rollback
+## 9. Add-on pack (`samsung-camera`)
+
+The patched APK ships as a regular catalog pack, so owners of the module can install it from
+the WebUI instead of pushing files by hand:
+
+```bash
+# 1. stage the patched APK where the pack builder expects it (git-ignored)
+addons/extra_sources/priv-app/SamsungCamera/SamsungCamera.apk
+
+# 2. (re)build this pack, its sha256/bytes in catalog.json, and the thin module ZIP
+python addons/scripts/build_all.py --packs samsung-camera
+
+# 3. upload dist/packs/samsung-camera.tar.xz + catalog.json
+python addons/scripts/upload_hf.py --repo GustyxPower/xmsrom-oneui9.5-addons
+```
+
+Catalog entry: `samsung-camera` (`Kamera`), archive `samsung-camera.tar.xz`, target
+`priv-app/SamsungCamera`. `camera-feature.xml` is **not** part of the pack - it lives in the
+base module (section 6) because every mode depends on it.
+
+Installing the pack copies the APK over
+`/data/adb/modules/xmsrom_oneui95_addons/system/priv-app/SamsungCamera/SamsungCamera.apk` and sets
+the "reboot required" flag; the pack was verified end-to-end on the test device
+(`install_local` -> reboot -> camera boots and captures).
+
+## 10. Rollback
 
 Keep the untouched firmware APK (`cam_fw/_chk/dev.apk`) as the fallback: push it over the
 module copy, reboot, and the camera behaves exactly like the stock firmware port again.

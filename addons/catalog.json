@@ -349,6 +349,25 @@
       "targets": [
         "app/BixbyWakeup"
       ]
+    },
+    {
+      "id": "samsung-camera",
+      "name": "Samsung Camera (One UI 9.5)",
+      "category": "Kamera",
+      "category_en": "Camera",
+      "badge": "Utama",
+      "badge_en": "Core",
+      "description": "Aplikasi kamera Samsung bawaan One UI 9.5 (17.5.00.69) hasil porting, sudah dipatch: foto & video belakang/depan, MALAM, PRO, dan VIDEO PRO berjalan tanpa crash.",
+      "description_en": "Ported One UI 9.5 Samsung Camera (17.5.00.69) with smali patches: rear/front photo and video, Night, Pro and Video Pro all run without crashing.",
+      "note": "Wajib memakai tanda tangan Samsung (jangan di-re-sign). Mode PANORAMA & MAKANAN dimatikan karena keterbatasan HAL; detail di docs/samsung-camera.md. Butuh reboot setelah install.",
+      "note_en": "Must keep the Samsung signature (never re-sign). PANORAMA & FOOD are disabled due to HAL limits; see docs/samsung-camera.md. Reboot required after install.",
+      "archive": "samsung-camera.tar.xz",
+      "archive_bytes": 26811144,
+      "unpacked_mb": 77.8,
+      "sha256": "ee924a5a53289e4d78fa85d911698e71fb9f4cab9a1ad6ab1846508f4b34a006",
+      "targets": [
+        "priv-app/SamsungCamera"
+      ]
     }
   ]
 }
