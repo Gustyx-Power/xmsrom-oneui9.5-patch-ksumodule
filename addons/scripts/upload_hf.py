@@ -22,6 +22,11 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Upload add-on packs to Hugging Face Dataset")
     parser.add_argument("--repo", default="GustyxPower/xmsrom-oneui9.5-addons", help="Hugging Face dataset repo id")
     parser.add_argument("--token", default=os.environ.get("HF_TOKEN"), help="Hugging Face Write Token")
+    parser.add_argument(
+        "--packs",
+        nargs="*",
+        help="Only upload these pack IDs (e.g. samsung-camera); catalog.json is always synced",
+    )
     args = parser.parse_args()
 
     if not PACKS_DIR.is_dir():
@@ -29,13 +34,30 @@ def main() -> None:
 
     api = HfApi(token=args.token)
     api.create_repo(repo_id=args.repo, repo_type="dataset", exist_ok=True)
-    print(f"[HF] Uploading packs from {PACKS_DIR} to datasets/{args.repo}...")
-    api.upload_folder(
-        folder_path=str(PACKS_DIR),
-        repo_id=args.repo,
-        repo_type="dataset",
-        commit_message="Upload XMSROM OneUI 9.5 modular add-on packs",
-    )
+
+    if args.packs:
+        paths = [PACKS_DIR / f"{pid}.tar.xz" for pid in args.packs]
+        missing = [str(p) for p in paths if not p.is_file()]
+        if missing:
+            raise SystemExit(f"Missing pack archive(s): {', '.join(missing)}")
+        print(f"[HF] Uploading {len(paths)} pack(s) to datasets/{args.repo}...")
+        for path in paths:
+            api.upload_file(
+                path_or_fileobj=str(path),
+                path_in_repo=path.name,
+                repo_id=args.repo,
+                repo_type="dataset",
+                commit_message=f"Upload {path.name}",
+            )
+            print(f"  -> {path.name} ({path.stat().st_size / 1048576:.1f} MB)")
+    else:
+        print(f"[HF] Uploading packs from {PACKS_DIR} to datasets/{args.repo}...")
+        api.upload_folder(
+            folder_path=str(PACKS_DIR),
+            repo_id=args.repo,
+            repo_type="dataset",
+            commit_message="Upload XMSROM OneUI 9.5 modular add-on packs",
+        )
     api.upload_file(
         path_or_fileobj=str(CATALOG_PATH),
         path_in_repo="catalog.json",

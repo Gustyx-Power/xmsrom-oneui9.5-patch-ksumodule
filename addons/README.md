@@ -53,6 +53,9 @@ pip install huggingface_hub
 set HF_TOKEN=hf_xxxxxxxxxxxxxxxxx
 python addons/scripts/upload_hf.py --repo GustyxPower/xmsrom-oneui9.5-addons
 
+# 2b. Or sync a single pack (catalog.json is always uploaded too)
+python addons/scripts/upload_hf.py --repo GustyxPower/xmsrom-oneui9.5-addons --packs samsung-camera
+
 # 3. Attach dist/xmsrom-oneui9.5-addons-v1.0.0.zip to GitHub Release tag v1.0.0
 ```
 
