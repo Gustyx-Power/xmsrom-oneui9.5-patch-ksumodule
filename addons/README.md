@@ -55,6 +55,12 @@ python addons/scripts/upload_hf.py --repo GustyxPower/xmsrom-oneui9.5-addons
 # 3. Attach dist/xmsrom-oneui9.5-addons-v1.0.0.zip to GitHub Release tag v1.0.0
 ```
 
+### SamsungCamera patches (signer identity)
+
+The ported `com.sec.android.app.camera` 17.5.00.69 carries smali patches whose APK **must keep
+its Samsung signature** (re-signing breaks the camera at startup). Build/repack/deploy steps and
+the full patch inventory live in [`docs/samsung-camera.md`](docs/samsung-camera.md).
+
 ---
 
 ## Bahasa Indonesia
@@ -89,3 +95,9 @@ python addons/scripts/upload_hf.py --repo GustyxPower/xmsrom-oneui9.5-addons
 
 # 3. Upload dist/xmsrom-oneui9.5-addons-v1.0.0.zip ke GitHub Releases (tag v1.0.0)
 ```
+
+### Patch SamsungCamera (tanda tangan APK)
+
+APK `com.sec.android.app.camera` 17.5.00.69 yang diporting berisi patch smali dan **wajib tetap
+bertanda tangan Samsung** (kalau di-*re-sign*, kamera mati saat start). Langkah build, repack,
+deploy, dan daftar patch lengkap ada di [`docs/samsung-camera.md`](docs/samsung-camera.md).

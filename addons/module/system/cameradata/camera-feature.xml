@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+  <!-- Shooting Modes (back/front must match tg.j1 shooting mode keys or be empty) -->
+  <local name="SHOOTING_MODE_PHOTO" back="PHOTO" front="PHOTO" enable="true" more="false" order="1" />
+  <local name="SHOOTING_MODE_VIDEO" back="VIDEO" front="VIDEO" enable="true" more="false" order="2" />
+  <local name="SHOOTING_MODE_LIVE_FOCUS" back="LIVE_FOCUS" front="" enable="false" more="false" order="0" />
+  <local name="SHOOTING_MODE_PRO" back="PRO" front="" enable="true" more="true" order="3" />
+  <local name="SHOOTING_MODE_PRO_VIDEO" back="PRO_VIDEO" front="" enable="true" more="true" order="4" />
+  <local name="SHOOTING_MODE_NIGHT" back="NIGHT" front="NIGHT" enable="true" more="true" order="5" />
+  <!-- PANORAMA disabled: PanoramaPhotoMaker requires Samsung vendor lens view-angle
+       characteristics (SemCameraCharacteristics field J) that the marble HAL does not expose.
+       Enabling it makes the app crash on mode entry (getResolution / max imageRate). -->
+  <local name="SHOOTING_MODE_PANORAMA" back="PANORAMA" front="" enable="false" more="true" order="6" />
+  <local name="SHOOTING_MODE_FOOD" back="FOOD" front="" enable="false" more="true" order="7" />
+  <local name="SHOOTING_MODE_QR" back="QR" front="" enable="true" more="false" order="-1" />
+
+  <!-- Back Camera Picture Resolutions (matched to marble HAL + cb.l2) -->
+  <local name="BACK_CAMERA_PICTURE_DEFAULT_RESOLUTION" value="1920x1440" />
+  <local name="BACK_CAMERA_RESOLUTION_4BY3_LARGE" value="1920x1440" />
+  <local name="BACK_CAMERA_RESOLUTION_16BY9_LARGE" value="3840x2160" />
+  <local name="BACK_CAMERA_RESOLUTION_1BY1_LARGE" value="3472x3472" />
+  <local name="BACK_CAMERA_RESOLUTION_FULL_RATIO" value="2400x1080" />
+
+  <!-- Back Wide Camera Resolutions -->
+  <local name="BACK_WIDE_CAMERA_RESOLUTION_4BY3_LARGE" value="1920x1440" />
+  <local name="BACK_WIDE_CAMERA_RESOLUTION_16BY9_LARGE" value="1920x1080" />
+  <local name="BACK_WIDE_CAMERA_RESOLUTION_1BY1_LARGE" value="1088x1088" />
+  <local name="BACK_WIDE_CAMERA_RESOLUTION_FULL_RATIO" value="2400x1080" />
+
+  <!-- Front Camera Picture Resolutions -->
+  <local name="FRONT_CAMERA_PICTURE_DEFAULT_RESOLUTION" value="1920x1440" />
+  <local name="FRONT_CAMERA_RESOLUTION_4BY3_LARGE" value="1920x1440" />
+  <local name="FRONT_CAMERA_RESOLUTION_16BY9_LARGE" value="1920x1080" />
+  <local name="FRONT_CAMERA_RESOLUTION_1BY1_LARGE" value="1088x1088" />
+  <local name="FRONT_CAMERA_RESOLUTION_FULL_RATIO" value="2400x1080" />
+
+  <!-- Front Sensor Crop Resolutions -->
+  <local name="FRONT_CAMERA_SENSOR_CROP_RESOLUTION_4BY3_LARGE" value="1920x1440" />
+  <local name="FRONT_CAMERA_SENSOR_CROP_RESOLUTION_16BY9_LARGE" value="1920x1080" />
+  <local name="FRONT_CAMERA_SENSOR_CROP_RESOLUTION_1BY1_LARGE" value="1088x1088" />
+  <local name="FRONT_CAMERA_SENSOR_CROP_RESOLUTION_FULL_RATIO" value="2400x1080" />
+
+  <!-- Video Snapshot Cinema -->
+  <local name="BACK_VIDEO_SNAPSHOT_SIZE_CINEMA" value="1920x824" />
+  <local name="BACK_VIDEO_SNAPSHOT_SIZE_ANAMORPHIC_1_33X" value="1920x824" />
+  <local name="BACK_VIDEO_SNAPSHOT_SIZE_ANAMORPHIC_1_55X" value="1920x824" />
+  <local name="BACK_VIDEO_SNAPSHOT_SIZE_ANAMORPHIC_2X" value="1920x824" />
+  <local name="FRONT_VIDEO_SNAPSHOT_SIZE_CINEMA" value="1920x824" />
+
+  <!-- Recording Defaults & Representative Sizes -->
+  <local name="BACK_CAMERA_RECORDING_DEFAULT_RESOLUTION" value="1920x1080" />
+  <local name="BACK_CAMERA_PRO_RECORDING_DEFAULT_RESOLUTION" value="1920x1080" />
+  <local name="BACK_CAMERA_RECORDING_MIN_RESOLUTION" value="1280x720" />
+  <local name="FRONT_CAMERA_RECORDING_DEFAULT_RESOLUTION" value="1920x1080" />
+  <local name="FRONT_CAMERA_RECORDING_MIN_RESOLUTION" value="1280x720" />
+
+  <local name="REPRESENTATIVE_CAMCORDER_RESOLUTION_FOR_4_3_RATIO" value="1920x1440" />
+  <local name="REPRESENTATIVE_CAMCORDER_RESOLUTION_FOR_16_9_RATIO" value="1920x1080" />
+  <local name="REPRESENTATIVE_CAMCORDER_RESOLUTION_FOR_1_1_RATIO" value="1440x1440" />
+  <local name="REPRESENTATIVE_CAMCORDER_RESOLUTION_FOR_FULL_RATIO" value="2400x1080" />
+  <local name="REPRESENTATIVE_CAMCORDER_RESOLUTION_FOR_21_9_RATIO" value="1920x824" />
+
+  <!-- Real Preview Sizes -->
+  <local name="CAMERA_FULL_SCREEN_PREVIEW_WIDTH" value="2400" />
+  <local name="CAMERA_FULL_SCREEN_PREVIEW_HEIGHT" value="1080" />
+  <local name="REAL_PREVIEW_SIZE_4_3" value="1440x1080" />
+  <local name="REAL_PREVIEW_SIZE_16_9" value="1920x1080" />
+  <local name="REAL_PREVIEW_SIZE_1_1" value="1088x1088" />
+  <local name="REAL_PREVIEW_SIZE_20_9" value="2400x1080" />
+  <local name="REAL_PREVIEW_SIZE_21_9" value="1920x824" />
+  <local name="REAL_PREVIEW_SIZE_CIF" value="352x288" />
+
+  <!-- Back Camcorder Resolution Feature Maps -->
+  <local name="BACK_CAMCORDER_RESOLUTION_FEATURE_MAP_3840X2160" value="true" preview-size="1920x1080" snapshot-support="true" snapshot-size="3840x2160" vdis="true" super-vdis="false" hdr="false" hdr10="false" effect="false" object-tracking="false" seamless-zoom-support="false" physical-zoom-supported="false" external-storage-support="false" />
+  <local name="BACK_CAMCORDER_RESOLUTION_FEATURE_MAP_3840X2160_60FPS" value="true" preview-size="1920x1080" snapshot-support="true" snapshot-size="3840x2160" vdis="false" super-vdis="false" hdr="false" hdr10="false" effect="false" object-tracking="false" seamless-zoom-support="false" physical-zoom-supported="false" external-storage-support="false" />
+  <local name="BACK_CAMCORDER_RESOLUTION_FEATURE_MAP_2400X1080" value="true" preview-size="2400x1080" snapshot-support="true" snapshot-size="2400x1080" vdis="true" super-vdis="false" hdr="false" hdr10="false" effect="true" object-tracking="false" seamless-zoom-support="false" physical-zoom-supported="false" external-storage-support="false" />
+  <local name="BACK_CAMCORDER_RESOLUTION_FEATURE_MAP_1920X1440" value="true" preview-size="1440x1080" snapshot-support="true" snapshot-size="1920x1440" vdis="false" super-vdis="false" hdr="false" hdr10="false" effect="true" object-tracking="false" seamless-zoom-support="false" physical-zoom-supported="false" external-storage-support="false" />
+  <local name="BACK_CAMCORDER_RESOLUTION_FEATURE_MAP_1920X1080" value="true" preview-size="1920x1080" snapshot-support="true" snapshot-size="3840x2160" vdis="true" super-vdis="false" hdr="false" hdr10="false" effect="true" object-tracking="false" seamless-zoom-support="false" physical-zoom-supported="false" external-storage-support="false" />
+  <local name="BACK_CAMCORDER_RESOLUTION_FEATURE_MAP_1920X1080_60FPS" value="true" preview-size="1920x1080" snapshot-support="true" snapshot-size="3840x2160" vdis="true" super-vdis="false" hdr="false" hdr10="false" effect="false" object-tracking="false" seamless-zoom-support="false" physical-zoom-supported="false" external-storage-support="false" />
+  <local name="BACK_CAMCORDER_RESOLUTION_FEATURE_MAP_1440X1440" value="true" preview-size="1088x1088" snapshot-support="true" snapshot-size="3472x3472" vdis="false" super-vdis="false" hdr="false" hdr10="false" effect="true" object-tracking="false" seamless-zoom-support="false" physical-zoom-supported="false" external-storage-support="false" />
+  <local name="BACK_CAMCORDER_RESOLUTION_FEATURE_MAP_1280X720" value="true" preview-size="1280x720" snapshot-support="true" snapshot-size="1280x720" vdis="false" super-vdis="false" hdr="false" hdr10="false" effect="true" object-tracking="false" seamless-zoom-support="false" physical-zoom-supported="false" external-storage-support="false" />
+
+  <!-- Front Camcorder Resolution Feature Maps -->
+  <local name="FRONT_CAMCORDER_RESOLUTION_FEATURE_MAP_2400X1080" value="true" preview-size="2400x1080" snapshot-support="true" snapshot-size="2400x1080" vdis="false" super-vdis="false" hdr="false" hdr10="false" effect="true" object-tracking="false" seamless-zoom-support="false" physical-zoom-supported="false" external-storage-support="false" />
+  <local name="FRONT_CAMCORDER_RESOLUTION_FEATURE_MAP_1920X1440" value="true" preview-size="1440x1080" snapshot-support="true" snapshot-size="1920x1440" vdis="false" super-vdis="false" hdr="false" hdr10="false" effect="true" object-tracking="false" seamless-zoom-support="false" physical-zoom-supported="false" external-storage-support="false" />
+  <local name="FRONT_CAMCORDER_RESOLUTION_FEATURE_MAP_1920X1080" value="true" preview-size="1920x1080" snapshot-support="true" snapshot-size="1920x1080" vdis="false" super-vdis="false" hdr="false" hdr10="false" effect="true" object-tracking="false" seamless-zoom-support="false" physical-zoom-supported="false" external-storage-support="false" />
+  <local name="FRONT_CAMCORDER_RESOLUTION_FEATURE_MAP_1440X1440" value="true" preview-size="1088x1088" snapshot-support="true" snapshot-size="1088x1088" vdis="false" super-vdis="false" hdr="false" hdr10="false" effect="true" object-tracking="false" seamless-zoom-support="false" physical-zoom-supported="false" external-storage-support="false" />
+  <local name="FRONT_CAMCORDER_RESOLUTION_FEATURE_MAP_1280X720" value="true" preview-size="1280x720" snapshot-support="true" snapshot-size="1280x720" vdis="false" super-vdis="false" hdr="false" hdr10="false" effect="true" object-tracking="false" seamless-zoom-support="false" physical-zoom-supported="false" external-storage-support="false" />
+
+  <!-- Feature Toggles -->
+  <local name="SUPPORT_NORMAL_RESOLUTION" value="true" />
+  <local name="SUPPORT_MOTION_PHOTO" value="false" />
+  <local name="SUPPORT_DUAL_CAMERA_MODE" value="false" />
+  <local name="SUPPORT_SEAMLESS_ZOOM" value="false" />
+  <local name="SUPPORT_RECORDING_MULTI_MIC_ZOOM_FOCUS" value="false" />
+</resources>

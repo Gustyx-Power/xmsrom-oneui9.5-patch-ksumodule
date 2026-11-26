@@ -151,6 +151,7 @@ magic_mount_dir "system/priv-app"
 magic_mount_dir "system/app"
 magic_mount_dir "system/etc/permissions"
 magic_mount_dir "system/etc/sysconfig"
+magic_mount_dir "system/cameradata"
 
 if [ -d "$MODDIR/system/framework" ]; then
   for f in "$MODDIR/system/framework"/*.jar; do
@@ -182,6 +183,20 @@ if [ -d "$MODDIR/system/lib64" ]; then
       log "ERROR: bind lib64/${f##*/} failed"
     fi
   done
+fi
+
+# Override Samsung floating camera IDs for the target device before zygote starts.
+f="$MODDIR/system/etc/floating_feature.xml"
+target="/system/etc/floating_feature.xml"
+if [ -f "$f" ] && [ -f "$target" ]; then
+  chmod 0644 "$f" 2>/dev/null
+  chcon u:object_r:system_file:s0 "$f" 2>/dev/null
+  if "$BB" mount --bind "$f" "$target"; then
+    "$BB" mount --make-private "$target" 2>/dev/null
+    log "mounted file etc/floating_feature.xml"
+  else
+    log "ERROR: bind etc/floating_feature.xml failed"
+  fi
 fi
 
 rmdir /dev/.xms_orig/system /dev/.xms_orig 2>/dev/null
