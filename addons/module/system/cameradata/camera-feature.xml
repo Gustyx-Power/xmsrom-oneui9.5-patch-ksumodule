@@ -15,7 +15,7 @@
   <local name="SHOOTING_MODE_QR" back="QR" front="" enable="true" more="false" order="-1" />
 
   <!-- Back Camera Picture Resolutions (matched to marble HAL + cb.l2) -->
-  <local name="BACK_CAMERA_PICTURE_DEFAULT_RESOLUTION" value="1920x1440" />
+  <local name="BACK_CAMERA_PICTURE_DEFAULT_RESOLUTION" value="3840x2160" />
   <local name="BACK_CAMERA_RESOLUTION_4BY3_LARGE" value="1920x1440" />
   <local name="BACK_CAMERA_RESOLUTION_16BY9_LARGE" value="3840x2160" />
   <local name="BACK_CAMERA_RESOLUTION_1BY1_LARGE" value="3472x3472" />

@@ -244,7 +244,7 @@
       "note_en": "",
       "archive": "bixby-vision.tar.xz",
       "archive_bytes": 10838928,
-      "unpacked_mb": 31.0,
+      "unpacked_mb": 31,
       "sha256": "3e7a0d23d0903a98139f7e990d3a5841030845ee25433cbb93d5361e70b78080",
       "targets": [
         "app/VisionIntelligence3.7"
@@ -305,7 +305,7 @@
       "note_en": "Large 338 MB pack that runs background contextual indexing (higher RAM usage).",
       "archive": "smart-suggestions.tar.xz",
       "archive_bytes": 158868136,
-      "unpacked_mb": 338.0,
+      "unpacked_mb": 338,
       "sha256": "1983d4c9df8faa6fb9a2515b810c484f4f156f164d8a0274efa2bb75b100174c",
       "targets": [
         "priv-app/SamsungSmartSuggestions"
@@ -357,14 +357,14 @@
       "category_en": "Camera",
       "badge": "Utama",
       "badge_en": "Core",
-      "description": "Aplikasi kamera Samsung bawaan One UI 9.5 (17.5.00.69) hasil porting, sudah dipatch: foto & video belakang/depan, MALAM, PRO, dan VIDEO PRO berjalan tanpa crash.",
-      "description_en": "Ported One UI 9.5 Samsung Camera (17.5.00.69) with smali patches: rear/front photo and video, Night, Pro and Video Pro all run without crashing.",
-      "note": "Wajib memakai tanda tangan Samsung (jangan di-re-sign). Mode PANORAMA & MAKANAN dimatikan karena keterbatasan HAL; detail di docs/samsung-camera.md. Butuh reboot setelah install.",
-      "note_en": "Must keep the Samsung signature (never re-sign). PANORAMA & FOOD are disabled due to HAL limits; see docs/samsung-camera.md. Reboot required after install.",
+      "description": "Aplikasi kamera Samsung bawaan One UI 9.5 (17.5.00.69) hasil porting, sudah dipatch: foto & video belakang/depan, MALAM, PRO, dan VIDEO PRO berjalan tanpa crash. Foto default 3840x2160 (8,3 MP).",
+      "description_en": "Ported One UI 9.5 Samsung Camera (17.5.00.69) with smali patches: rear/front photo and video, Night, Pro and Video Pro all run without crashing. Default still is 3840x2160 (8.3 MP).",
+      "note": "Wajib memakai tanda tangan Samsung (jangan di-re-sign). Mode PANORAMA & MAKANAN dimatikan karena keterbatasan HAL; video 60 fps dan watermark belum tersedia di port ini. Detail di docs/samsung-camera.md. Butuh reboot setelah install.",
+      "note_en": "Must keep the Samsung signature (never re-sign). PANORAMA & FOOD are disabled due to HAL limits; 60 fps video and watermark are not available on this port yet. See docs/samsung-camera.md. Reboot required after install.",
       "archive": "samsung-camera.tar.xz",
-      "archive_bytes": 26811144,
+      "archive_bytes": 26811132,
       "unpacked_mb": 77.8,
-      "sha256": "ee924a5a53289e4d78fa85d911698e71fb9f4cab9a1ad6ab1846508f4b34a006",
+      "sha256": "051bf94fad46bccdd7151b782a80814fc2c1ccbcadd6b36d2b6d6a2183e573bc",
       "targets": [
         "priv-app/SamsungCamera"
       ]
