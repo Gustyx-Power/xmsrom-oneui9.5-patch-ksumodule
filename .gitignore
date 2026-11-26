@@ -1,4 +1,5 @@
 dist/
+staging/
 extra_sources/
 __pycache__/
 *.pyc
