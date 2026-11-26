@@ -362,9 +362,9 @@
       "note": "Wajib memakai tanda tangan Samsung (jangan di-re-sign). Mode PANORAMA & MAKANAN dimatikan karena keterbatasan HAL; video 60 fps dan watermark belum tersedia di port ini. Detail di docs/samsung-camera.md. Butuh reboot setelah install.",
       "note_en": "Must keep the Samsung signature (never re-sign). PANORAMA & FOOD are disabled due to HAL limits; 60 fps video and watermark are not available on this port yet. See docs/samsung-camera.md. Reboot required after install.",
       "archive": "samsung-camera.tar.xz",
-      "archive_bytes": 26811132,
+      "archive_bytes": 26811136,
       "unpacked_mb": 77.8,
-      "sha256": "051bf94fad46bccdd7151b782a80814fc2c1ccbcadd6b36d2b6d6a2183e573bc",
+      "sha256": "4ecbacfea3f9b722734fd8e2045e3b93ce07f0c6391d4e1a5b440ba40cc323bb",
       "targets": [
         "priv-app/SamsungCamera"
       ]

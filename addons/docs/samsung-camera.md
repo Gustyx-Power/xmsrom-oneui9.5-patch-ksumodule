@@ -91,10 +91,12 @@ su -c "mount --bind /data/adb/modules/xmsrom_oneui95_addons/system/cameradata/ca
 | `classes2.dex` | `yf/p0.smali` `m1()` | `if-eqz p0, :skip_audio_panel_stop` before `zf/c.stop()` | leaving **VIDEO PRO** crashed with `Attempt to invoke virtual method 'void zf.c.stop()' on a null object reference` |
 | `classes5.dex` | `yf/m0.smali` (lambda) | `if-eqz p0, :skip_audio_panel_update` before `zf/c.l()` | same null presenter, reached from the audio-input-type callback |
 | `classes4.dex` | `NodeChainConfiguration.isWatermarkNodeChainRequired()` | the two `if-eqz` returns replaced by `nop`, so the method always returns `true` | on this port the core2 processing chain never gets `NODE_CHAIN_KEY_WATERMARK`, so an enabled "Tanda air" is silently dropped on save (see section 8) |
+| `classes2.dex` | `ProcessingPhotoMakerBase` (`...takePicture...`) | `if-eqz v0, :cond_1` in front of the `mWatermarkConfig` check replaced by `nop`, so `ExtraBundle.h0` (`watermark.data.watermarkConfig`) is attached whenever the maker has a config, even if `MakerPrivateKey.H` reads false | second half of the same attempt: without the bundle entry the watermark node has nothing to draw |
 
 `classes.dex` and `classes3.dex` stay byte-identical to the firmware APK; `classes2.dex`
-grows by 8 bytes, `classes5.dex` by 8 bytes (four guards) and `classes4.dex` shrinks by 4 bytes
-(two 1-code-unit `nop`s replacing two 2-code-unit `if-eqz`).
+grows by 8 bytes plus 4 more for the watermark guard, `classes5.dex` by 8 bytes (the four crash
+guards) and `classes4.dex` shrinks by 4 bytes (two 1-code-unit `nop`s replacing two 2-code-unit
+`if-eqz`).
 
 ## 6. `system/cameradata/camera-feature.xml`
 
@@ -156,11 +158,13 @@ failure as PANORAMA/FOOD. `4000x3000` is not in the HAL list at all.
   `30` on *every* physical device id (the only >30 ranges are high-speed capture sizes
   `1920x1080`/`1280x720` at 120/240/480 fps), so VIDEO / VIDEO PRO cannot offer 60 fps from the app
   side - it needs a vendor CAMX/CHI config change.
-- **Watermark ("Tanda air")**: the UI toggle is honoured by the app (it builds the overlay config and
-  sets `MakerPrivateKey.H`), but no watermark ends up in the JPEG. `NodeChainConfiguration` now
-  always inserts the watermark node chain (patch above), which is necessary but not sufficient: the
-  core2 `WatermarkNode` still leaves the YUV buffer untouched on this build. Open issue - not a
-  settings mistake.
+- **Watermark ("Tanda air")**: the toggle *is* read - `WatermarkManager: createOverlayWatermarkConfig
+  text : 1, date : 1, time : 1` shows the app building the overlay config, and prefs carry
+  `watermark=1`, `watermark_settings=1_1`. Two forced patches (watermark node chain always composed,
+  `ExtraBundle.h0` always attached when a config exists) still produce a JPEG without any overlay -
+  `WatermarkNode.processPictureJpeg/Raw` are pass-through stubs in this build and the YUV path never
+  paints. Open issue: needs a dedicated hook, not a setting fix. Evidence: `cam_fw/p8mp_wm.jpg`,
+  `cam_fw/p_wm3.jpg` (3840x2160, no overlay in any corner).
 - **Panorama**: disabled - needs Samsung vendor lens view angles that the marble HAL does not publish.
 - **Food**: disabled - missing `libFoodDetector` native library.
 - **Pro video audio panel**: the `Pensel - Omni` mic overlay appears, but the presenter object
@@ -216,4 +220,5 @@ module copy, reboot, and the camera behaves exactly like the stock firmware port
 - Sudah diverifikasi di perangkat: foto belakang/depan, video belakang/depan, MALAM, PRO,
   serta masuk-keluar VIDEO PRO tanpa crash. Foto 3840x2160 terbukti tersimpan.
 - Belum selesai (butuh kerja lanjutan, bukan salah setting): foto 4:3 >2,7 MP, video 60 fps
-  (HAL membatasi 30 fps), dan watermark yang belum muncul di hasil foto.
+  (HAL membatasi 30 fps), dan watermark - dua patch paksa sudah dipasang (rantai node +
+  `ExtraBundle.h0`) tetapi `WatermarkNode` tetap tidak menggambar apa pun di hasil foto.
