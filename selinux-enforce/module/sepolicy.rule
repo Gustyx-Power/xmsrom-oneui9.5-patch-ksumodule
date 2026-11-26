@@ -229,10 +229,6 @@ allow platform_app incremental_prop file map
 allow platform_app incremental_prop file open
 allow platform_app incremental_prop file read
 allow platform_app init unix_stream_socket connectto
-allow platform_app netlink_kobject_uevent_socket bind
-allow platform_app netlink_kobject_uevent_socket create
-allow platform_app netlink_kobject_uevent_socket read
-allow platform_app netlink_kobject_uevent_socket setopt
 allow platform_app platform_app netlink_kobject_uevent_socket bind
 allow platform_app platform_app netlink_kobject_uevent_socket create
 allow platform_app platform_app netlink_kobject_uevent_socket read
@@ -279,10 +275,6 @@ allow platform_app_36 incremental_prop file getattr
 allow platform_app_36 incremental_prop file map
 allow platform_app_36 incremental_prop file open
 allow platform_app_36 incremental_prop file read
-allow platform_app_36 netlink_kobject_uevent_socket bind
-allow platform_app_36 netlink_kobject_uevent_socket create
-allow platform_app_36 netlink_kobject_uevent_socket read
-allow platform_app_36 netlink_kobject_uevent_socket setopt
 allow platform_app_36 platform_app_36 netlink_kobject_uevent_socket bind
 allow platform_app_36 platform_app_36 netlink_kobject_uevent_socket create
 allow platform_app_36 platform_app_36 netlink_kobject_uevent_socket read
@@ -678,6 +670,45 @@ allow zygote product_ship_prop file getattr
 allow zygote product_ship_prop file map
 allow zygote product_ship_prop file open
 allow zygote product_ship_prop file read
+# SamsungDeviceHealthManagerService (sdhms)
+allow system_app cgroup dir search
+allow system_app cgroup file getattr
+allow system_app cgroup file open
+allow system_app cgroup file read
+allow system_app dumplog_data_file file unlink
+allow system_app proc_uptime file getattr
+allow system_app proc_uptime file open
+allow system_app proc_uptime file read
+allow system_app sysfs dir search
+allow system_app sysfs file getattr
+allow system_app sysfs file open
+allow system_app sysfs file read
+allow system_app sysfs lnk_file getattr
+allow system_app sysfs lnk_file read
+allow system_app sysfs_leds dir search
+allow system_app sysfs_leds file getattr
+allow system_app sysfs_leds file open
+allow system_app sysfs_leds file read
+allow system_app sysfs_rtc dir search
+allow system_app sysfs_rtc file getattr
+allow system_app sysfs_rtc file open
+allow system_app sysfs_rtc file read
+allow system_app system_app netlink_kobject_uevent_socket bind
+allow system_app system_app netlink_kobject_uevent_socket create
+allow system_app system_app netlink_kobject_uevent_socket getattr
+allow system_app system_app netlink_kobject_uevent_socket read
+allow system_app system_app netlink_kobject_uevent_socket setopt
+allow system_app vendor_sysfs_battery_supply file getattr
+allow system_app vendor_sysfs_battery_supply file open
+allow system_app vendor_sysfs_battery_supply file read
+allow system_app vendor_sysfs_graphics dir search
+allow system_app vendor_sysfs_graphics file getattr
+allow system_app vendor_sysfs_graphics file open
+allow system_app vendor_sysfs_graphics file read
+allow system_app vendor_sysfs_usb_supply dir search
+allow system_app vendor_sysfs_usb_supply file getattr
+allow system_app vendor_sysfs_usb_supply file open
+allow system_app vendor_sysfs_usb_supply file read
 allowxperm dumpstate dumplog_data_file file ioctl 0x5401
 allowxperm gmscore_app privapp_data_file file ioctl 0xf500-0xf5ff
 allowxperm init property_data_file file ioctl 0xf500-0xf5ff
@@ -691,6 +722,7 @@ allowxperm priv_app media_rw_data_file file ioctl 0x5820
 allowxperm priv_app privapp_data_file file ioctl 0xf500-0xf5ff
 allowxperm priv_app_36 fuse_device chr_file ioctl 0xe57e
 allowxperm priv_app_36 privapp_data_file file ioctl 0xf500-0xf5ff
+allowxperm system_app system_app_data_file file ioctl 0xf500-0xf5ff
 allowxperm system_app system_data_file file ioctl 0xf500-0xf5ff
 allowxperm system_server adb_keys_file file ioctl 0xf500-0xf5ff
 allowxperm system_server apex_system_server_data_file file ioctl 0xf500-0xf5ff
